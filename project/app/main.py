@@ -3,6 +3,7 @@ import dotenv
 import os
 
 import flask_migrate as f_mig
+from flask_cors import CORS
 from .routes.routes_utils import bp as utils_bp
 from .routes.routes_users import bp as users_bp
 from .routes.routes_languages import bp as languages_bp
@@ -37,6 +38,8 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
     api.init_app(app)
+
+    CORS(app, resources={r"/*": {"origins": ["http://localhost:3000", "http://localhost:5173"]}})
 
     #endpoints
     api.register_blueprint(utils_bp)

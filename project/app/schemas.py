@@ -62,7 +62,6 @@ class WordOutputSchema(Schema):
 class TranslationCreateSchema(Schema):
     from_word = fields.Nested(WordInputSchema, required=True)
     to_word = fields.Nested(WordInputSchema, required=True)
-    direction_code = fields.Str(required=True, validate=validate.OneOf([e.value for e in DirectionEnum]))
     is_public = fields.Bool(load_default=False)
     user_id = fields.Int(required=True)
 

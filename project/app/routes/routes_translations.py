@@ -35,6 +35,11 @@ class TranslationsList(MethodView): #klasa do obslugi /translations
         #sprawdzamy, czy uzytkownik ma juz takie slowa w bazie
         from_word = Word.query.filter_by(text=data['from_word']['text'],language_id=from_lang.id, user_id=data['user_id']).first()
         to_word = Word.query.filter_by(text=data['to_word']['text'],language_id=to_lang.id, user_id=data['user_id']).first()
+
+        #sprawdzamy, czy taka translacja jest juz w bazie
+        if from_word and to_word:
+            if Translation.query.filter_by(user_id=data['user_id'], from_word_id=from_word.id, to_word_id=to_word.id).first():
+                return jsonify({"error": "Translacja tych słów już istnieje"}), 400
         
         #jak nie ma to tworzymy slowo zrodlowe
         if not from_word:
@@ -60,15 +65,26 @@ class TranslationsList(MethodView): #klasa do obslugi /translations
             db.session.add(to_word)
             db.session.flush() #przypisujemy id ale nie commit
 
+        direction_code = from_lang.code+'_'+to_lang.code
+
         translation = Translation(
             from_word_id=from_word.id,
             to_word_id=to_word.id,
-            direction_code=data['direction_code'],
+            direction_code=direction_code,
+            user_id=data["user_id"],
+            is_public=data.get('is_public', False)
+        )
+
+        translation_opposite = Translation(
+            from_word_id=to_word.id,
+            to_word_id=from_word.id,
+            direction_code=('_').join(direction_code.split('_')[::-1]),
             user_id=data["user_id"],
             is_public=data.get('is_public', False)
         )
 
         db.session.add(translation)
+        db.session.add(translation_opposite)
         
         try:
             db.session.commit()

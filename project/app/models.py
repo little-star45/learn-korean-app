@@ -24,7 +24,15 @@ class Language(db.Model):
     code: Column[String] = db.Column(db.String(10), unique=True, nullable=False)
     name: Column[String] =  db.Column(db.String(50), unique=True, nullable=False)
 
-    language = db.relationship('Language', backref='words')
+    words = db.relationship('Word', backref='language', lazy=True)
+    #one to many
+    
+    #jeden jezyk Language - moze miec wiele słów
+    #language_id - klucz obcy
+    #Word - nazwa klasy/ modelu z ktorym tworzę relację
+    #backref='language'- Automatycznie dodaje odwrotną relację w klasie Word — więc w Word możesz pisać word.language
+    #lazy=True - Określa, kiedy SQLAlchemy pobiera dane. lazy=True (alias lazy='select') oznacza, że dane słów zostaną pobrane dopiero, gdy ich potrzebujesz — np. przy lang.words
+
 
 class Word(db.Model):
     __tablename__ = 'words'
