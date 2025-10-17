@@ -4,6 +4,71 @@
 }
 @plugin "@tailwindcss/typography";
 
+.modal {
+    @layer daisyui.component {
+        pointer-events: none;
+        visibility: hidden;
+        position: fixed;
+        inset: calc(0.25rem /* 4px */ * 0) /* 0rem = 0px */;
+        margin: calc(0.25rem /* 4px */ * 0) /* 0rem = 0px */;
+        display: grid;
+        height: 100%;
+        max-height: none;
+        width: 100%;
+        max-width: none;
+        align-items: center;
+        justify-items: center;
+        background-color: transparent;
+        padding: calc(0.25rem /* 4px */ * 0) /* 0rem = 0px */;
+        color: inherit;
+        transition: visibility 0.3s allow-discrete, background-color 0.3s ease-out, opacity 0.1s ease-out;
+        overflow: clip;
+        overscroll-behavior: contain;
+        z-index: 999;
+        scrollbar-gutter: auto;
+        &::backdrop {
+            display: none;
+        }
+    }
+    @layer daisyui.modifier {
+        &.modal-open, &[open], &:target, .modal-toggle:checked + & {
+            pointer-events: auto;
+            visibility: visible;
+            opacity: 100%;
+            transition: visibility 0s allow-discrete, background-color 0.3s ease-out, opacity 0.1s ease-out;
+            /* background-color: oklch(0% 0 0/ 0.4); */
+            .modal-box {
+                translate: 0 0;
+                scale: 1;
+                opacity: 1;
+            }
+        }
+        @starting-style {
+            &.modal-open, &[open], &:target, .modal-toggle:checked + & {
+                opacity: 0%;
+            }
+        }
+    }
+}
+
+.modal-bottom {
+    @layer daisyui.modifier {
+        place-items: end;
+        .modal-box {
+            height: auto;
+            width: 100%;
+            max-width: none;
+            max-height: calc(100vh - 5em);
+            translate: 0 100%;
+            scale: 1;
+            --modal-tl: var(--radius-box) /* var(--radius-box) */;
+            --modal-tr: var(--radius-box) /* var(--radius-box) */;
+            --modal-bl: 0;
+            --modal-br: 0;
+        }
+    }
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

@@ -29,6 +29,17 @@ It allows users to add, translate, and practice words between different language
 * TailwindCSS
 * Fetch API (communication with Flask backend)
 
+### 🏗️ Architecture / Data Layer
+
+The frontend follows the **Service Layer pattern** together with the **Separation of Concerns** principle:
+
+- API calls (e.g., `getlanguages`) are encapsulated in separate files under the `services/` directory.
+- React components are responsible only for rendering the UI and handling user interactions.
+- All data fetching and business logic are separated from the components, making the codebase cleaner, easier to maintain, and simpler to test.
+- Changes to the API endpoints or data logic can be made in the service layer without modifying the components.
+
+This setup allows the frontend to remain modular and maintainable, while keeping API logic isolated from the UI.
+
 ## 🧩 Example API Endpoints
 
 | Method   | Endpoint                 | Description                                                 |
@@ -59,3 +70,7 @@ It allows users to add, translate, and practice words between different language
 * Progress tracking (mark words as known/unknown)
 * Korean virtual keyboard integration (`hangul-js` / `es-hangul`)
 * Practice mode with spaced repetition
+
+### Database diagram
+
+<iframe width="560" height="315" src='https://dbdiagram.io/e/68eb7ce6d2b621e4226c7b7a/68f265112e68d21b41032657'> </iframe>
