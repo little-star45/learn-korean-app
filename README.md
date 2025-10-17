@@ -72,5 +72,8 @@ This setup allows the frontend to remain modular and maintainable, while keeping
 * Practice mode with spaced repetition
 
 ### Database diagram
+Not all data models are included in the code yet! - work in progress
+<img src="./dbdiagram.png" width="800" alt="Database diagram">
 
-<iframe width="560" height="315" src='https://dbdiagram.io/e/68eb7ce6d2b621e4226c7b7a/68f265112e68d21b41032657'> </iframe>
+[Open diagram on dbdiagram.io](https://dbdiagram.io/e/68eb7ce6d2b621e4226c7b7a/68f285132e68d21b4107d171)
+
