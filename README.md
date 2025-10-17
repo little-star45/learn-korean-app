@@ -1,96 +1,61 @@
-### **Oddzielenie logiki aplikacji od punktu startowego**
+# 🇰🇷 Korean App — Fullstack Vocabulary Trainer
 
-* W folderze `app/` trzymasz całą logikę aplikacji:
-  * konfigurację Flaska,
-  * modele bazodanowe,
-  * blueprinty, widoki itp.
-* `run.py` jest tylko **entrypointem** – uruchamia aplikację
+A fullstack web application for learning and managing Korean vocabulary.
 
-project/
- ├─ app/
- │   ├─ main.py      # fabryka aplikacji, konfiguracja Flask, routing; create_app, db, migrate
- │   └─ models.py    # definicje modeli SQLAlchemy
+It allows users to add, translate, and practice words between different languages — starting with Polish ↔ Korean and English ↔ Korean directions.
 
-│   └─ routes.py    # endpointy
- └─ run.py           # punkt startowy aplikacji
+## ✨ Features
 
+* 🗣️ **Add new words** in multiple languages with automatic handling of duplicates
+* 🔁 **Create translations** between existing or new words
+* 🎲 **Get random words** for quick learning sessions
+* 👤 **User system** with password hashing (secure authentication ready for JWT)
+* 🌐 **API** built with Flask and SQLAlchemy
+* 💅 **Frontend** built with React + TailwindCSS for a clean, minimal UI
+* ⚙️ **CORS integration** between backend and frontend for seamless communication
 
-extensions.py - trzymamy tam wszystkie rozszerzenia ktore sa inicjalizaowane globalnie
+## 🧱 Tech Stack
 
-init migrations:
+**Backend**
 
-cmd /C "set FLASK_APP=project.app.main:create_app && flask db init"
+* Python 3 / Flask
+* Flask-Smorest (for REST API structure + schema validation)
+* SQLAlchemy + Alembic (ORM + migrations)
+* PostgreSQL (database)
 
-* To **jednorazowy sposób ustawienia zmiennej środowiskowej** i wywołania komendy w jednym kroku.
-* `set FLASK_APP=project.app.main:create_app` → mówi Flaskowi, gdzie jest Twoja aplikacja i fabryka `create_app()`.
-* `&& flask db init` → od razu uruchamia komendę `flask db init`.
-* `cmd /C` → uruchamia to w podkomendzie Windows CMD, a nie w PowerShell.
-* **folder `migrations/` został utworzony** , a Flask-Migrate jest poprawnie podpięty. Teraz kolejne kroki są proste.
+**Frontend**
 
-flask db init           # tylko raz, jeśli jeszcze nie masz folderu migrations
-flask db migrate -m "Initial migration"   # tworzy nową migrację
-flask db upgrade        # stosuje migrację w bazie
+* React (Vite setup)
+* TailwindCSS
+* Fetch API (communication with Flask backend)
 
-## Jak to naprawić w PowerShell
+## 🧩 Example API Endpoints
 
-1️⃣ Ustaw zmienną środowiskową dla tej sesji:
+| Method   | Endpoint                 | Description                                                 |
+| -------- | ------------------------ | ----------------------------------------------------------- |
+| `GET`  | `/languages/`          | Fetch all available languages                               |
+| `POST` | `/translations/`       | Add a new translation (creates missing words automatically) |
+| `GET`  | `/translations/random` | Get a random translation for a user & direction             |
+| `POST` | `/auth/token`          | Simple login (hashed password check)                        |
 
-$env:FLASK_APP = "project.app.main:create_app"
+## 🚀 How to Run
 
-* `project.app.main` → moduł `main.py` w folderze `project/app/`
-* `create_app` → funkcja fabrykująca aplikację
-
-2️⃣ (Opcjonalnie) sprawdź, czy Flask ją widzi:
-
-flask --app project.app.main:create_app run
-
-* Albo, jeśli zmienna środowiskowa jest już ustawiona:
-  flask run
-
-3️⃣ Teraz możesz używać  **Flask-Migrate** :
-
-flask db migrate -m "Initial migration"
-flask db upgrade
-
----
-
-### **Marshmallow**
-
-> **Do czego służy:** serializacja, deserializacja i walidacja danych.
-
-#### 🔹 Czyli:
-
-* **Waliduje dane wejściowe** (np. z JSON w żądaniu POST).
-* **Konwertuje obiekty Pythona ↔ JSON** (czyli dane dla API).
-* Używamy go do tworzenia tzw. **schemas** (`UserSchema`, `WordSchema`, itd.).
-
-#### 🧠 Przykład:
-
-Jeśli użytkownik wyśle:
-
-<pre class="overflow-visible!" data-start="506" data-end="560"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary"><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-json"><span><span>{</span><span></span><span>"username"</span><span>:</span><span></span><span>"Dom"</span><span>,</span><span></span><span>"email"</span><span>:</span><span></span><span>"dom@x.pl"</span><span></span><span>}</span><span>
-</span></span></code></div></div></pre>
-
-to Marshmallow:
-
-* sprawdzi, czy `username` i `email` są wymagane,
-* zamieni JSON → obiekt Pythona,
-* przy wysyłaniu odpowiedzi zrobi odwrotnie: obiekt → JSON.
+1. **Backend**
+   ```bash
+   cd project 
+   flask run 
+   ```
+2. **Frontend**
+   ```bash
+   cd frontend
+   npm run dev
+   ```
 
 ---
 
-### ⚙️ **Flask-Smorest**
+💡 **Future ideas:**
 
-> **Rozszerzenie dla Flask** , które łączy:
-
-* **Marshmallow** (walidacja danych),
-* **OpenAPI/Swagger** (automatyczna dokumentacja),
-* **Blueprinty** (czyste, modułowe API).
-
-#### 🔹 Czyli:
-
-Flask-Smorest sprawia, że możesz:
-
-* łatwo tworzyć endpointy z dokumentacją i walidacją w jednym miejscu,
-* mieć automatyczny  **Swagger UI (/docs)** ,
-* nie pisać osobno dokumentacji API — generuje się sama z kodu.
+* JWT-based authentication
+* Progress tracking (mark words as known/unknown)
+* Korean virtual keyboard integration (`hangul-js` / `es-hangul`)
+* Practice mode with spaced repetition
