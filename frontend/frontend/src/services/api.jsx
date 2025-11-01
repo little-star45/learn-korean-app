@@ -17,3 +17,17 @@ export const getRandomTranslation = async(props) =>{
         const result = await response.json()
         return result
 }
+
+export const postNewTranslation = async(props) =>{
+    const {translationData} = props
+    console.log(translationData)
+        const response = await fetch(`${apiUrl}/translations/`,
+            {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(translationData)
+            }
+        )
+        const result = await response.json()
+        return result
+}

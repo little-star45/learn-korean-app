@@ -12,6 +12,8 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.14",
     "daisyui": "^5.3.2",
+    "hangul-js": "^0.2.6",
+    "hangul-romanization": "^1.0.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-simple-keyboard": "^3.8.130",
