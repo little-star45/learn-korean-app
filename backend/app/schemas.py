@@ -88,3 +88,12 @@ class TranslationQueryRandomSchema(Schema):
         validate=validate.OneOf([e.value for e in DirectionEnum])
     )
     limit = fields.Int(load_default=1)
+
+class SpellcheckInputSchema(Schema):
+    word = fields.Str(required=True)
+    language_code = fields.Str(required=True)
+
+class SpellcheckOutputSchema(Schema):
+    isValid = fields.Bool(required=True)
+    suggestion = fields.Str(required=True)
+    error = fields.Str(required=False)

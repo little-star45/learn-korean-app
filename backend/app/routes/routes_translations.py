@@ -1,5 +1,4 @@
 from flask_smorest import Blueprint, abort
-from flask import request
 from flask.views import MethodView
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.sql.expression import func

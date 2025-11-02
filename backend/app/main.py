@@ -8,6 +8,7 @@ from .routes.routes_utils import bp as utils_bp
 from .routes.routes_users import bp as users_bp
 from .routes.routes_languages import bp as languages_bp
 from .routes.routes_auth import bp as auth_bp
+from .routes.routes_ollama import bp as ollama_bp
 # from .routes.routes_words import bp as words_bp
 from .routes.routes_translations import bp as translations_bp
 
@@ -47,5 +48,6 @@ def create_app():
     api.register_blueprint(auth_bp)
     api.register_blueprint(languages_bp)
     api.register_blueprint(translations_bp)
+    api.register_blueprint(ollama_bp)
 
     return app

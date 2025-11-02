@@ -40,6 +40,18 @@ services:
       - "5434:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+  
+  ollama:
+    image: alpine/ollama:0.12.9
+    container_name: ollama
+    ports:
+      - "11435:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    environment:
+      OLLAMA_MODELS: "gemma3:270m-it-q8_0"
+    restart: unless-stopped
 
 volumes:
   pgdata:
+  ollama_data:
