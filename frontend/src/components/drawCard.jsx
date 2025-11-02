@@ -1,9 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import { getRandomTranslation } from "../services/api";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const DrawCardModule = (props) =>{
-    const {secondaryLanguage, primaryLanguage} = props
+    const { primaryLanguage, secondaryLanguage } = useLanguage();
     const [fiszkaOdkryta, setFiszkaOdkryta] = useState(false)
     const [randomWord, setRandomWord] = useState(undefined)
 

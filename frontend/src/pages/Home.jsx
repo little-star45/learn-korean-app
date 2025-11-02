@@ -14,15 +14,10 @@ const HomePage = () => {
         setTranscripts(response)
     }
 
-    const [primaryLanguage, setPrimaryLanguage] = useState(undefined)
-    const [secondaryLanguage, setSecondaryLanguage] = useState(undefined)
-
-
     useEffect(()=>{
         fetchTranscriptOptions()
     }
     ,[])
-
 
 
     return (
@@ -30,25 +25,15 @@ const HomePage = () => {
         <main className='flex flex-col gap-4'>
 
             <section className='flex flex-row gap-2 items-center space-x-3 border-2 border-cyan-600 rounded-md p-4 '>
-                <LanguageSelectorModule 
-                    setPrimaryLanguage={setPrimaryLanguage} 
-                    setSecondaryLanguage={setSecondaryLanguage} 
-                    transcripts={transcripts}
-                /> 
+                <LanguageSelectorModule transcripts={transcripts}/> 
             </section>
 
             <section className='space-y-4 border-2 border-amber-500 rounded-md p-4 '>
-                <AddTranslationModule
-                    primaryLanguage={primaryLanguage} 
-                    secondaryLanguage={secondaryLanguage}
-                />
+                <AddTranslationModule/>
             </section>
 
             <section className='space-y-4 border-2 border-amber-500 rounded-md p-4 '>
-                <DrawCardModule 
-                    secondaryLanguage={secondaryLanguage} 
-                    primaryLanguage={primaryLanguage}
-                />
+                <DrawCardModule/>
             </section>       
         </main>
         

@@ -1,8 +1,10 @@
 import React from "react";
 import { useState } from "react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const LanguageSelectorModule = (props) =>{
-  const {setPrimaryLanguage, setSecondaryLanguage, transcripts} = props
+  const {transcripts} = props
+  const { setPrimaryLanguage, setSecondaryLanguage } = useLanguage();
 
   return (
     <>
