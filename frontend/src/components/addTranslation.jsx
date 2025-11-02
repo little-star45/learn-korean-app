@@ -4,9 +4,9 @@ import { postNewTranslation } from "../services/api";
 import * as hangulRomanization from 'hangul-romanization';
 import * as hangul from 'hangul-js';
 
-const assembled = hangul.assemble(['ㅇ','ㅣ','ㄴ','ㅣ','ㅇ','ㅛ']); // -> "이니요"
-const roman = hangulRomanization.convert(assembled); // -> "iniyo"
-console.log(roman);
+// const assembled = hangul.assemble(['ㅇ','ㅣ','ㄴ','ㅣ','ㅇ','ㅛ']); // -> "이니요"
+// const roman = hangulRomanization.convert(assembled); // -> "iniyo"
+// console.log(roman);
 
 import VirtualKeyboard from "./virtualKeyboard";
 

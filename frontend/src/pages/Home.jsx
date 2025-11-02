@@ -1,5 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
-import VirtualKeyboard from '../components/virtualKeyboard'
+import { useState, useEffect} from 'react'
 import DrawCardModule from '../components/drawCard'
 
 import { getlanguages } from '../services/api'
