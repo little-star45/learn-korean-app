@@ -1,4 +1,4 @@
-version: '3.9'
+version: "3.9"
 
 services:
   backend:
@@ -29,7 +29,7 @@ services:
       - /app/node_modules
     command: /bin/sh -c "npm install && npm run dev"
     restart: unless-stopped
-    
+
   db:
     image: postgres:15
     environment:
@@ -40,18 +40,18 @@ services:
       - "5434:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
-  
-  ollama:
-    image: alpine/ollama:0.12.9
-    container_name: ollama
-    ports:
-      - "11435:11434"
-    volumes:
-      - ollama_data:/root/.ollama
-    environment:
-      OLLAMA_MODELS: "gemma3:270m-it-q8_0"
-    restart: unless-stopped
+
+  # ollama:
+  #   image: alpine/ollama:0.12.9
+  #   container_name: ollama
+  #   ports:
+  #     - "11435:11434"
+  #   volumes:
+  #     - ollama_data:/root/.ollama
+  #   environment:
+  #     OLLAMA_MODELS: "gemma3:270m-it-q8_0"
+  #   restart: unless-stopped
 
 volumes:
   pgdata:
-  ollama_data:
+  # ollama_data:
